@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IndiaN BloginG</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .blog-editor {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input[type="text"],
+        textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .blog-posts {
+            /* Style individual blog posts here */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to BLOGING</h1>
+    </header>
+    <main>
+        <section class="blog-editor">
+            <h2>Create your new Blog Post</h2>
+            <form id="blog-form">
+                <input type="text" id="title" placeholder="Title" required>
+                <textarea id="content" placeholder="Write your blog post here" required></textarea>
+                <input type="file" id="image" accept="image/*">
+                <input type="file" id="video" accept="video/*">
+                <button type="submit">Publish now</button>
+            </form>
+        </section>
+        <section class="blog-posts" id="blog-posts">
+        </section>
+    </main>
+    <script>
+
+        const blogForm = document.getElementById('blog-form');
+        const blogPosts = document.getElementById('blog-posts');
+
+        blogForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+            const image = document.getElementById('image').files[0];
+            const video = document.getElementById('video').files[0];
+
+            const blogPost = document.createElement('div');
+            blogPost.classList.add('blog-post');
+            blogPost.innerHTML = `
+                <h2>${title}</h2>
+                <p>${content}</p>
+            `;
+
+            if (image) {
+                const imgElement = document.createElement('img');
+                imgElement.src = URL.createObjectURL(image);
+                blogPost.appendChild(imgElement);
+            }
+
+            if (video) {
+                const videoElement = document.createElement('video');
+                videoElement.src = URL.createObjectURL(video);
+                videoElement.controls = true;
+                blogPost.appendChild(videoElement);
+            }
+
+            blogPosts.appendChild(blogPost);
+            blogForm.reset();
+        });
+    </script>
+</body>
+</html>
