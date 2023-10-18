@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project Management Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .task {
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #464641;
+            color: white;
+        }
+
+        .task h3 {
+            margin: 0;
+        }
+
+        .task p {
+            margin-top: 5px;
+        }
+
+        .task-form {
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 11px;
+        }
+
+        .status {
+            margin-right: 10px;
+        }
+        h1{
+            position: relative;
+            color: white;
+            left: 190px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Project Management Tool</h1>
+        <div class="task-list" id="task-list">
+        </div>
+        <div class="task-form">
+            <h2>Add a New Task</h2>
+            <form id="task-form">
+                <label for="title">Task Title:</label>
+                <input type="text" id="title" name="title" required><br>
+                <label for="description">Task Description:</label>
+                <textarea id="description" name="description"></textarea><br>
+                <label for="status">Status:</label>
+                <select id="status" name="status">
+                    <option value="To Do">To Do</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Done">Done</option>
+                </select><br>
+                <input type="submit" value="Add Task">
+            </form>
+        </div>
+    </div>
+
+    <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const taskForm = document.getElementById('task-form');
+            const taskList = document.getElementById('task-list');
+
+            taskForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const title = document.getElementById('title').value;
+                const description = document.getElementById('description').value;
+                const status = document.getElementById('status').value;
+
+                const taskDiv = document.createElement('div');
+                taskDiv.className = 'task';
+                taskDiv.innerHTML = `
+                    <h3>${title}</h3>
+                    <p>${description}</p>
+                    <div class="status">Status: ${status}</div>
+                `;
+
+                taskList.appendChild(taskDiv);
+                document.getElementById('title').value = '';
+                document.getElementById('description').value = '';
+            });
+        });
+    </script>
+</body>
+</html>
